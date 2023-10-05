@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Custom CSS for the holographic effect */
+        .card {
+            position: relative;
+        }
+
+        .holo-shine {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 255, 0.2) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 255, 0.2) 40%);
+            background-size: 150% 150%;
+            animation: holoAnimation 2s infinite;
+            z-index: 1;
+            pointer-events: none; /* Make the pseudo-element non-interactive */
+        }
+        
+
+
+        @keyframes holoAnimation {
+            0% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- navigation button -->
+    <nav class="navbar navbar-light" style="background-color: #efdfed;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family: Raleway">POKÉMON GO</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/api/addPokemon">Add Pokemon</a></li>
+                <li class="active"><a href="/api/deletePokemon">Delete Pokemon</a></li>
+            </ul>
+            
+        </div>
+    </nav>
+
+    <!-- Section: Design Block -->
+    <section class="vh-200" style="background-color: #ffda38;">
+        <div class="row justify-content-center">
+            <% for (var i = 0; i < pokemon_go.length; i++) { %>
+                <div class="card mx-3 my-3" style="width: 18rem; background-color: transparent; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 50% 50% 0 0 / 15% 15% 0 0;">
+                    <div class="holo-shine"></div>
+                    <img class="card-img-top rounded" src="https://www.clipartmax.com/png/small/145-1450331_pokemon-go-logo-small.png" alt="Card image cap" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><%= pokemon_go[i].Pokedex_Num %><b>* </b> <%= pokemon_go[i].Name %></h5>
+                        <p class="card-text"><b>Type:</b> <%= pokemon_go[i].Type_1 %></p>
+                        <p class="card-text"><b>Weather:</b> <%= pokemon_go[i].Weather_1 %></p>
+                        <a href="#" class="btn btn-warning">View</a>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </section>
+</body>
+</html>
